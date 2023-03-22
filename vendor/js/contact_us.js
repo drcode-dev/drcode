@@ -27,9 +27,9 @@ $(".contact_btn").on('click', function () {
 
         var accessURL;
         if(secondLevelLocation){
-            accessURL="https://drive.google.com/file/d/13F4KC029yC_uyZQCbl0Mnh5pBjN7CkZf/view?usp=share_link";
+            accessURL="./message.php";
         }else{
-            accessURL="https://drive.google.com/file/d/13F4KC029yC_uyZQCbl0Mnh5pBjN7CkZf/view?usp=share_link";
+            accessURL="message.php";
         }
 
         //data to be sent to server
@@ -122,9 +122,9 @@ $(".modal_contact_btn").on('click', function () {
 
         var accessURL;
         if(secondLevelLocation){
-            accessURL="https://drive.google.com/file/d/13F4KC029yC_uyZQCbl0Mnh5pBjN7CkZf/view?usp=share_link";
+            accessURL="./message.php";
         }else{
-            accessURL="https://drive.google.com/file/d/13F4KC029yC_uyZQCbl0Mnh5pBjN7CkZf/view?usp=share_link";
+            accessURL="message.php";
         }
 
         //data to be sent to server
