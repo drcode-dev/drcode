@@ -27,9 +27,9 @@ $(".contact_btn").on('click', function () {
 
         var accessURL;
         if(secondLevelLocation){
-            accessURL="../vendor/contact-mailer.php";
+            accessURL="./message.php";
         }else{
-            accessURL="vendor/contact-mailer.php";
+            accessURL="message.php";
         }
         //data to be sent to server
         $.ajax({
@@ -129,9 +129,9 @@ $(".modal_contact_btn").on('click', function () {
 
         var accessURL;
         if(secondLevelLocation){
-            accessURL="../vendor/contact-mailer.php";
+            accessURL="./message.php";
         }else{
-            accessURL="vendor/contact-mailer.php";
+            accessURL="message.php";
         }
         //data to be sent to server
         $.ajax({
@@ -141,8 +141,8 @@ $(".modal_contact_btn").on('click', function () {
             data : str,
             dataType: 'json',
             success: function(response) {
-				 alert(response.type);
-				
+                alert(response.type);
+
                 if (response.type == 'error') {
                     output = '<div class="alert-danger" style="padding:10px 15px; margin-bottom:30px;">' + response.text + '</div>';
                 } else {
