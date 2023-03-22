@@ -14,6 +14,7 @@ $message = $_POST['userMessage'];
 
             //Server settings
             $mail->isSMTP();                                            // Send using SMTP
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
             $mail->Host       = 'smtp.gmail.com';                       // Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
             $mail->Username   = 'drcode0dev';         // SMTP username
