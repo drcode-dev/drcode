@@ -1,44 +1,42 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+require 'vendor/autoload.php';
 
-		/* If there are no empty fields, i create new variables containing the input values
-		just to keep our script simple, so we can understand what is going on. */
-		$firstname =  $_POST['userName']; /* Remember that $data is an object now */
-		$email =  $_POST['userEmail'];
-		$message =$_POST['userMessage'];
-		/* Now i will check if the incoming email's value is valid */
+$name = $_POST['userName'];
+$email = $_POST['userEmail'];
+$subject = $_POST['userSubject'];
+$message = $_POST['userMessage'];
 
-		/* Now since we are here in this line, our incoming data are correct
-		and we are going to send the email. */
-		
-		
-		/* SET THE EMAIL ADDRESS YOU WANT TO RECEIVE THE MESSAGES  */
-		/* =============================================== */
-		$to = "ahmmmadha@hotmail.com";
-		/* =============================================== */
+$mail = new PHPMailer(true);
 
-		
-		/* Next we have to add a subject */
-		$subject = $firstname . " has a question for you";
-		/* Next we are setting some basic headers */
-		$headers = "MIME-Version: 1.0" . "\r\n";
-		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-		/* We have to add also a from header, because we want to know the email address from
-		the user who is contacting us. */
-		$headers .= 'From: '. $email . "\r\n";
-		/* Next we are sending the email */
-		$send = mail($to,$subject,$message, $headers);
-		/* And last we check if the mail() function was successful*/
-		if(!$send){
-			echo "error";
-		}else{
-			echo "success";
-		}
-	}
+//Server settings
+$mail->isSMTP();                                            // Send using SMTP
+$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+$mail->Host       = 'smtp.gmail.com';                       // Set the SMTP server to send through
+$mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+$mail->Username   = 'drcode0dev';         // SMTP username
+$mail->Password   = 'oriqteviahjsamec';                   // SMTP password
+$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;          // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+$mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
+//Recipients
+$mail->setFrom($email, $name);
+$mail->addAddress('drcode0dev@gmail.com');        // Add a recipient
 
+// Content
+$mail->isHTML(true);                                        // Set email format to HTML
+$mail->Subject = $subject;
+$mail->Body    = "Name: $name<br>Email: $email<br>Subject: $subject<br>Message: $message<br>";
+$success = $mail->send();
 
+if ($success) {
+    $result = ['result' => 'success'];
+} else {
+    $result = ['result' => 'error'];
+}
 
-
-
-
-
+header('Content-Type: application/json');
+echo json_encode($result);
+?>
